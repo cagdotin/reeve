@@ -1,0 +1,18 @@
+--- a/packages/engine/src/rules/handlers.ts
++++ b/packages/engine/src/rules/handlers.ts
+@@ -14,7 +14,6 @@
+   getTransaction,
+   heldAccounts,
+   moneyLeftUndone,
+-  reconciledTransactions,
+   updateTransaction,
+   type EntryDraft,
+ } from "../ledger/transactions.ts";
+@@ -182,7 +181,6 @@
+         : applyActions(db, before, actions, context);
+     if (after === null) {
+       // Only a person can agree to delete what is reconciled.
+-      if (reconciledTransactions(db, [row.transactionId]).size > 0) continue;
+       deleteTransactions(book, [row.transactionId]);
+       deleted.add(row.transactionId);
+     } else

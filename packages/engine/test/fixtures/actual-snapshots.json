@@ -1,0 +1,449 @@
+{
+  "CAMT.053 import works": [
+    {
+      "date": "2013-12-30",
+      "amount": 60,
+      "importedId": "2013123001153870000",
+      "importedPayee": "Testkonto Nummer 2",
+      "notes": "Sammler aus Testknto 2 Zweite Ueberweisung EREF:\n                                STZV-EtE28122013-11:29-1 IBAN: DE58740618130100033626 BIC:\n                                GENODEF1PFK ABWE: Testkonto 1"
+    },
+    {
+      "date": "2013-12-30",
+      "amount": 50,
+      "importedId": "2013123001153870001",
+      "importedPayee": "Testkonto Nummer 2",
+      "notes": "Sammler aus Testkonto 2 Erste Ueberweisung EREF:\n                                STZV-EtE28122013-11:29-2 IBAN: DE58740618130100033626 BIC:\n                                GENODEF1PFK ABWE: Testkonto 1"
+    },
+    {
+      "date": "2024-03-11",
+      "amount": -8985,
+      "importedId": "640387810124072/2",
+      "importedPayee": "Supermarkt A",
+      "notes": null
+    },
+    {
+      "date": "2014-01-05",
+      "amount": 120,
+      "importedId": "2014010509572410000",
+      "importedPayee": null,
+      "notes": "Retoure SEPA Lastschrift vom 03.01.2014, Rueckgabegrund: MD06\n                                Lastschriftwiderspruch durch den Zahlungspflichtigen EREF:\n                                STZV-EtE27122013-11 :05-2 CRED: DE79ZZZ00000000584 IBAN: DE14740618130000033626 BIC:\n                                GENODEF1PFK ABWE: Testkonto"
+    },
+    {
+      "date": "2024-03-12",
+      "amount": -8000,
+      "importedId": "367406715024072/1",
+      "importedPayee": "Rega",
+      "notes": null
+    },
+    {
+      "date": "2014-01-03",
+      "amount": 225,
+      "importedId": null,
+      "importedPayee": "Testkonto Nummer 2",
+      "notes": "Lastschrift 2. Zahlung TAN:747216 "
+    },
+    {
+      "date": "2014-01-03",
+      "amount": 120,
+      "importedId": null,
+      "importedPayee": "Testkonto Nummer 2",
+      "notes": "Lastschrift 1. Zahlung TAN:747216 "
+    }
+  ],
+  "handles UTF-8 encoding": [
+    {
+      "date": "2022-10-19",
+      "amount": -2000,
+      "importedId": "cafeUtf8xx",
+      "importedPayee": "Café Métro €uro",
+      "notes": "Paiement 5€ — débit"
+    }
+  ],
+  "handles html escaped plaintext": [
+    {
+      "date": "2023-05-09",
+      "amount": -100,
+      "importedId": "23129130032333396279270000",
+      "importedPayee": "000000000000000",
+      "notes": "PREAUTHORIZED DEBIT;B.C. HYDRO & POWER AUTHORITY;Electronic Funds Transfer"
+    },
+    {
+      "date": "2023-03-01",
+      "amount": -100,
+      "importedId": "23060061032549554596530000",
+      "importedPayee": "TPAY &lt;DEFTPYMT&gt;",
+      "notes": "PREAUTHORIZED DEBIT;LUXMORE REALTY PPTY MGMT;Electronic Funds Transfer"
+    }
+  ],
+  "handles non-ASCII characters": [
+    {
+      "date": "2022-10-19",
+      "amount": -2000,
+      "importedId": "wSoKuCS77",
+      "importedPayee": "Paiement facture/Carte prépayée",
+      "notes": "Mémo test: àÀçéÉèêëôû"
+    }
+  ],
+  "handles windows-1252 charset": [
+    {
+      "date": "2022-10-19",
+      "amount": -2000,
+      "importedId": "cafe1252xx",
+      "importedPayee": "Café Métro €uro",
+      "notes": "Paiement 5€ — débit"
+    }
+  ],
+  "import notes are respected when importing > transactions with notes": [
+    {
+      "date": "2019-01-23",
+      "amount": -3000,
+      "importedId": "00092990122-30.00019012312798.01",
+      "importedPayee": "PATIENT FIRST TOKEN 01/22 PURCHA",
+      "notes": null
+    },
+    {
+      "date": "2019-01-23",
+      "amount": -377,
+      "importedId": "00092990121-3.77019012312828.01",
+      "importedPayee": "STARBUCKS STORE 07604 01/21 PURC",
+      "notes": null
+    },
+    {
+      "date": "2019-01-23",
+      "amount": -962,
+      "importedId": "00092990121-9.62019012312831.78",
+      "importedPayee": "STARBUCKS STORE 07604 01/21 PURC",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -11599,
+      "importedId": "00090231800-115.99019012212841.40",
+      "importedPayee": "VERIZON DES:PAYMENTREC ID:XXXXX3",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -1034,
+      "importedId": "00092990120-10.34019012212957.39",
+      "importedPayee": "URBAN FARMHOUSE NO 2 01/19 PURCH",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -2253,
+      "importedId": "00092990120-22.53019012212967.73",
+      "importedPayee": "URBAN FARMHOUSE NO 2 01/19 PURCH",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -10871,
+      "importedId": "00092990119-108.71019012212990.26",
+      "importedPayee": "TMOBILE*AUTO PAY 01/19 PURCHASE",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -2500,
+      "importedId": "00092990118-25.00019012213098.97",
+      "importedPayee": "COUNTY WASTE 01/18 PURCHASE 804-",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -3238,
+      "importedId": "00092990118-32.38019012213123.97",
+      "importedPayee": "REGENCY MART CITGO 01/18 PURCHAS",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -607,
+      "importedId": "00092990117-6.07019012213156.35",
+      "importedPayee": "CHICK-FIL-A #01342 01/17 PURCHAS",
+      "notes": null
+    }
+  ],
+  "ofx import works (credit card)": [
+    {
+      "date": "2023-03-30",
+      "amount": -600,
+      "importedId": "57f91dca-0460-4692-be90-84165b7002",
+      "importedPayee": "LOUISIANA STATE MUSEUM751 PLACE JOHN PAUL NEW ORLEANS 70116-3205LA USA",
+      "notes": null
+    }
+  ],
+  "ofx import works": [
+    {
+      "date": "2019-01-23",
+      "amount": -3000,
+      "importedId": "00092990122-30.00019012312798.01",
+      "importedPayee": "PATIENT FIRST TOKEN 01/22 PURCHA",
+      "notes": null
+    },
+    {
+      "date": "2019-01-23",
+      "amount": -377,
+      "importedId": "00092990121-3.77019012312828.01",
+      "importedPayee": "STARBUCKS STORE 07604 01/21 PURC",
+      "notes": null
+    },
+    {
+      "date": "2019-01-23",
+      "amount": -962,
+      "importedId": "00092990121-9.62019012312831.78",
+      "importedPayee": "STARBUCKS STORE 07604 01/21 PURC",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -11599,
+      "importedId": "00090231800-115.99019012212841.40",
+      "importedPayee": "VERIZON DES:PAYMENTREC ID:XXXXX3",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -1034,
+      "importedId": "00092990120-10.34019012212957.39",
+      "importedPayee": "URBAN FARMHOUSE NO 2 01/19 PURCH",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -2253,
+      "importedId": "00092990120-22.53019012212967.73",
+      "importedPayee": "URBAN FARMHOUSE NO 2 01/19 PURCH",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -10871,
+      "importedId": "00092990119-108.71019012212990.26",
+      "importedPayee": "TMOBILE*AUTO PAY 01/19 PURCHASE",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -2500,
+      "importedId": "00092990118-25.00019012213098.97",
+      "importedPayee": "COUNTY WASTE 01/18 PURCHASE 804-",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -3238,
+      "importedId": "00092990118-32.38019012213123.97",
+      "importedPayee": "REGENCY MART CITGO 01/18 PURCHAS",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -607,
+      "importedId": "00092990117-6.07019012213156.35",
+      "importedPayee": "CHICK-FIL-A #01342 01/17 PURCHAS",
+      "notes": null
+    }
+  ],
+  "qfx import works": [
+    {
+      "date": "2019-01-23",
+      "amount": -3000,
+      "importedId": "00092990122-30.00019012312798.01",
+      "importedPayee": "PATIENT FIRST TOKEN 01/22 PURCHA",
+      "notes": null
+    },
+    {
+      "date": "2019-01-23",
+      "amount": -377,
+      "importedId": "00092990121-3.77019012312828.01",
+      "importedPayee": "STARBUCKS STORE 07604 01/21 PURC",
+      "notes": null
+    },
+    {
+      "date": "2019-01-23",
+      "amount": -962,
+      "importedId": "00092990121-9.62019012312831.78",
+      "importedPayee": "STARBUCKS STORE 07604 01/21 PURC",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -11599,
+      "importedId": "00090231800-115.99019012212841.40",
+      "importedPayee": "VERIZON DES:PAYMENTREC ID:XXXXX3",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -1034,
+      "importedId": "00092990120-10.34019012212957.39",
+      "importedPayee": "URBAN FARMHOUSE NO 2 01/19 PURCH",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -2253,
+      "importedId": "00092990120-22.53019012212967.73",
+      "importedPayee": "URBAN FARMHOUSE NO 2 01/19 PURCH",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -10871,
+      "importedId": "00092990119-108.71019012212990.26",
+      "importedPayee": "TMOBILE*AUTO PAY 01/19 PURCHASE",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -2500,
+      "importedId": "00092990118-25.00019012213098.97",
+      "importedPayee": "COUNTY WASTE 01/18 PURCHASE 804-",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -3238,
+      "importedId": "00092990118-32.38019012213123.97",
+      "importedPayee": "REGENCY MART CITGO 01/18 PURCHAS",
+      "notes": null
+    },
+    {
+      "date": "2019-01-22",
+      "amount": -607,
+      "importedId": "00092990117-6.07019012213156.35",
+      "importedPayee": "CHICK-FIL-A #01342 01/17 PURCHAS",
+      "notes": null
+    }
+  ],
+  "qif import works": [
+    {
+      "date": "2018-12-19",
+      "amount": -2500,
+      "importedId": null,
+      "importedPayee": "COUNTY WASTE 12/18 PURCHASE 804-8439288 VA",
+      "notes": null
+    },
+    {
+      "date": "2018-12-19",
+      "amount": -4500,
+      "importedId": null,
+      "importedPayee": "õSSELDORF KÖLN SALON - LIBBIE GR 12/18 PURCHASE RICHMOND VA",
+      "notes": null
+    },
+    {
+      "date": "2018-12-19",
+      "amount": -3133,
+      "importedId": null,
+      "importedPayee": "LOFT 0845 CHES 12/19 PURCHASE RICHMOND VA",
+      "notes": null
+    },
+    {
+      "date": "2018-12-19",
+      "amount": -631,
+      "importedId": null,
+      "importedPayee": "TARGET T- 1130 12/19 PURCHASE Richmond VA",
+      "notes": null
+    },
+    {
+      "date": "2018-12-19",
+      "amount": -4192,
+      "importedId": null,
+      "importedPayee": "TARGET DEBIT CRD ACH TRAN CO ID:XXXXX15170 POS TARGET -1018 RICHMOND V",
+      "notes": null
+    },
+    {
+      "date": "2018-12-19",
+      "amount": -2401,
+      "importedId": null,
+      "importedPayee": "TARGET DEBIT CRD DES:ACH TRAN ID:XXXXX0370723991 INDN:S LONG 9321 CO I",
+      "notes": null
+    },
+    {
+      "date": "2018-12-19",
+      "amount": -1200,
+      "importedId": null,
+      "importedPayee": "TARGET DEBIT CRD DES:ACH TRAN ID:XXXXX0370723991 INDN:S LONG 9703 CO I",
+      "notes": null
+    },
+    {
+      "date": "2018-12-20",
+      "amount": 87485,
+      "importedId": null,
+      "importedPayee": "BKOFAMERICA MOBILE 12/20 3705340250 DEPOSIT *MOBILE VA",
+      "notes": null
+    },
+    {
+      "date": "2018-12-20",
+      "amount": -1263,
+      "importedId": null,
+      "importedPayee": "AMAZON.COM*M21KD0HA0 AM 12/19 PURCHASE AMZN.COM/BILL WA",
+      "notes": null
+    },
+    {
+      "date": "2018-12-20",
+      "amount": -3600,
+      "importedId": null,
+      "importedPayee": "TARGET DEBIT CRD DES:ACH TRAN ID:XXXXX0370723991 INDN:S LONG 6486 CO I",
+      "notes": null
+    },
+    {
+      "date": "2018-12-21",
+      "amount": -521,
+      "importedId": null,
+      "importedPayee": "STARBUCKS STORE 07604 12/19 PURCHASE RICHMOND VA",
+      "notes": null
+    },
+    {
+      "date": "2018-12-21",
+      "amount": -3470,
+      "importedId": null,
+      "importedPayee": "AMAZON.COM*M236431E2 AM 12/19 PURCHASE AMZN.COM/BILL WA",
+      "notes": null
+    },
+    {
+      "date": "2018-12-21",
+      "amount": -541,
+      "importedId": null,
+      "importedPayee": "STARBUCKS STORE 07604 12/19 PURCHASE RICHMOND VA",
+      "notes": null
+    },
+    {
+      "date": "2018-12-21",
+      "amount": -10529,
+      "importedId": null,
+      "importedPayee": "AMAZON.COM*M208P98U1 AM 12/19 PURCHASE AMZN.COM/BILL WA",
+      "notes": null
+    },
+    {
+      "date": "2018-12-21",
+      "amount": -736,
+      "importedId": null,
+      "importedPayee": "AMAZON.COM*M29QF7M71 AM 12/19 PURCHASE AMZN.COM/BILL WA",
+      "notes": null
+    },
+    {
+      "date": "2018-12-21",
+      "amount": -1285,
+      "importedId": null,
+      "importedPayee": "AMAZON.COM*M20VB1851 AM 12/20 PURCHASE AMZN.COM/BILL WA",
+      "notes": null
+    },
+    {
+      "date": "2018-12-21",
+      "amount": -1299,
+      "importedId": null,
+      "importedPayee": "AMZN MKTP US*M27HH51C2 12/20 PURCHASE AMZN.COM/BILL WA",
+      "notes": null
+    },
+    {
+      "date": "2018-12-21",
+      "amount": -6278,
+      "importedId": null,
+      "importedPayee": "CVS/PHARM 0154 12/21 PURCHASE RICHMOND VA",
+      "notes": null
+    }
+  ]
+}

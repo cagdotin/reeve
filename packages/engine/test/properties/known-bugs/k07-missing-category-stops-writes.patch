@@ -1,0 +1,11 @@
+--- a/packages/engine/src/rules/transaction.ts
++++ b/packages/engine/src/rules/transaction.ts
+@@ -179,7 +179,7 @@
+ 
+ /** A category a rule still names may be gone, from a book older than rules following deletes. */
+ const existingCategory = (db: Db, id: string | null): string | null =>
+-  accountRow(db, id) === undefined ? null : id;
++  id;
+ 
+ /** Only a transfer out of the budget carries a category, so a rule's stays off any other. */
+ const transferTakesNoCategory = (db: Db, entry: EntryDraft): boolean => {

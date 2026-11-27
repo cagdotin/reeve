@@ -1,0 +1,89 @@
+# reeve brand
+
+Assets, examples and guides for the reeve brand: a financial steward that is trustworthy,
+structured, intelligent and calm.
+
+<BrandHero />
+
+<BrandNav />
+
+## At a glance
+
+What the brand stands for, in four lines.
+
+<BrandGlance />
+
+## Logo
+
+The mark is a ledger page that becomes an R. There is one mark, drawn from one set of vectors at
+every size, and the name is outlined, so no logo needs a font installed. The name is always
+lowercase, even at the start of a sentence.
+
+<LogoCards />
+
+### Clear space and small sizes
+
+Keep one ledger row of clear space around the mark, marked **x** below. Its lines scale with it, so
+it stays as light at 16px as it is at 48px.
+
+<LogoConstruction />
+
+## App icon
+
+The icon is the mark on a parchment or forest plate. Parchment is the default, on the desktop app and
+in browser tabs. Inside the app there is no plate: the mark takes the theme's text color.
+
+<AppIcons />
+
+## Color
+
+Five colors, in about these proportions: mostly Parchment and Forest, with Pine and Sage in support
+and Brass used sparingly. They are for the icon, the logo and marketing. The app itself is neutral
+([look rules](../rules/look.md)). Click a color to copy its hex.
+
+<ColorMosaic />
+
+### Pairings
+
+Text has to stay readable, so each pairing below shows its measured contrast against the WCAG levels.
+
+<ColorPairings />
+
+### Data colors
+
+The app's charts draw from eight hues of their own, led by blue and checked for color-blind
+separation on each theme's surface. Use them for charts only.
+
+<DataColors />
+
+## Typography
+
+Geist sets words and figures, and Geist Mono sets code. The logo is the
+exception: its name is Nunito Bold, for the rounded ends, and its tagline Inter Medium, both outlined,
+so they are drawings and not type to set. Don't use either anywhere else.
+
+<Typography />
+
+## Best practices
+
+Reference these guidelines when using the reeve identity.
+
+<BestPractices />
+
+## In use
+
+The brand in the places people meet it first.
+
+<InUse />
+
+## Brand kit
+
+Everything on this page, ready to use. Download it all at once, or take only the file you need.
+
+<BrandKit />
+
+## Changing the brand
+
+`pnpm brand:generate` draws every logo and icon from `scripts/generate-brand.ts`, and writes the
+color tokens and the kit from `docs/brand/tokens/colors.json`. Change those, not the generated files.
+The app's themes, Day and Night, are the tokens in `packages/ui/src/styles.css`, and they use none of these colors.

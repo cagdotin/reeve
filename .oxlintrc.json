@@ -1,0 +1,269 @@
+{
+  "$schema": "./node_modules/oxlint/configuration_schema.json",
+  "categories": {
+    "correctness": "error"
+  },
+  "plugins": ["typescript", "react", "react-perf", "jsx-a11y", "import", "vitest", "oxc"],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "options": {
+    "typeAware": true
+  },
+  "rules": {
+    "react/react-in-jsx-scope": "off",
+    "react-hooks/exhaustive-deps": "off",
+    "jsx-a11y/no-autofocus": "off",
+    "import/no-unassigned-import": "off",
+    "typescript/no-base-to-string": "off",
+    "typescript/restrict-template-expressions": "off",
+    "typescript/no-floating-promises": "error"
+  },
+  "ignorePatterns": [
+    "dist/**",
+    "coverage/**",
+    "apps/web/src/routeTree.gen.ts",
+    ".agents/skills/**",
+    ".claude/**",
+    "packages/engine/src/db/migrations.gen.ts"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "apps/landing/src/components/**",
+        "apps/landing/src/lib/**",
+        "apps/landing/src/hooks/**"
+      ],
+      "rules": {
+        "react/purity": "off",
+        "react/refs": "off",
+        "react/set-state-in-effect": "off",
+        "react/immutability": "off",
+        "no-unused-vars": "off",
+        "jsx-a11y/prefer-tag-over-role": "off",
+        "jsx-a11y/control-has-associated-label": "off"
+      }
+    },
+    {
+      "files": ["packages/ui/src/components/**"],
+      "rules": {
+        "jsx-a11y/prefer-tag-over-role": "off",
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/no-noninteractive-element-interactions": "off",
+        "jsx-a11y/anchor-has-content": "off"
+      }
+    },
+    {
+      "files": ["packages/contract/src/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["node:*", "@reeve/engine", "@reeve/engine/*"],
+                "message": "The contract runs in the browser too: no Node modules and no engine."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["packages/ui/src/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "@/**",
+                  "**/apps/**",
+                  "@reeve/*",
+                  "@reeve/*/**",
+                  "!@reeve/ui/**",
+                  "node:*"
+                ],
+                "message": "@reeve/ui is the UI kit the app and the plugins' web halves share: it imports no reeve package and no app."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["apps/web/src/**", "apps/desktop/src/preload.ts"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "@reeve/engine",
+                  "@reeve/engine/*",
+                  "drizzle-orm",
+                  "drizzle-orm/*",
+                  "node:*"
+                ],
+                "message": "The browser bundle may not hold engine code: talk to the server through @reeve/contract/client."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["apps/web/src/routes/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["react-dom"],
+                "message": "A route gives its title and actions to Page, which portals them: no portals in a route."
+              },
+              {
+                "group": ["@reeve/ui/components/spinner"],
+                "message": "A page waits through Page's query or QueryBody, which show the spinner."
+              },
+              {
+                "group": ["@reeve/ui/components/scroll-area"],
+                "message": "A page has one scroller, the frame's. A table wider than the page scrolls sideways in ScrollArea, inside its own component."
+              },
+              {
+                "group": [
+                  "@reeve/engine",
+                  "@reeve/engine/*",
+                  "drizzle-orm",
+                  "drizzle-orm/*",
+                  "node:*"
+                ],
+                "message": "The browser bundle may not hold engine code: talk to the server through @reeve/contract/client."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["apps/web/src/**/*.test.ts", "apps/web/src/**/*.test.tsx"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["@reeve/engine", "@reeve/engine/*"],
+                "message": "The browser bundle may not hold engine code: talk to the server through @reeve/contract/client."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["packages/engine/src/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["@reeve/server", "@reeve/mcp", "@reeve/cli", "@reeve/client"],
+                "message": "Packages depend in one direction: contract <- engine <- mcp <- server <- cli."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["packages/mcp/src/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "@reeve/server",
+                  "@reeve/server/*",
+                  "@reeve/cli",
+                  "@reeve/cli/*",
+                  "@reeve/client",
+                  "@reeve/client/*"
+                ],
+                "message": "Packages depend in one direction: contract <- engine <- mcp <- server <- cli, and client on engine."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["packages/server/src/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": ["@reeve/cli", "@reeve/cli/*", "@reeve/client", "@reeve/client/*"],
+                "message": "Packages depend in one direction: contract <- engine <- mcp <- server <- cli, and client on engine."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["packages/client/src/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "@reeve/mcp",
+                  "@reeve/mcp/*",
+                  "@reeve/server",
+                  "@reeve/server/*",
+                  "@reeve/cli",
+                  "@reeve/cli/*"
+                ],
+                "message": "Packages depend in one direction: contract <- engine <- mcp <- server <- cli, and client on engine."
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "files": ["apps/landing/src/**"],
+      "rules": {
+        "no-restricted-imports": [
+          "error",
+          {
+            "patterns": [
+              {
+                "group": [
+                  "@reeve/engine",
+                  "@reeve/engine/*",
+                  "drizzle-orm",
+                  "drizzle-orm/*",
+                  "node:*"
+                ],
+                "message": "The browser bundle may not hold engine code: talk to the server through @reeve/contract/client."
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}

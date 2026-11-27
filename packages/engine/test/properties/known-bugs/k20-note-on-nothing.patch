@@ -1,0 +1,56 @@
+diff --git a/packages/engine/src/book.ts b/packages/engine/src/book.ts
+index 6d2d5ae..8015955 100644
+--- a/packages/engine/src/book.ts
++++ b/packages/engine/src/book.ts
+@@ -68,14 +68,6 @@ export const notesOf = (db: Db): Map<string, string> =>
+       .map((row) => [row.id, row.note]),
+   );
+ 
+-/** A note belongs to an account, a category, a category group or a budget month. */
+-export const refuseNoteOnNothing = (db: Db, id: string) => {
+-  if (/^budget-\d{4}-\d{2}$/.test(id)) return;
+-  const account = db.select().from(t.accounts).where(eq(t.accounts.id, id)).get();
+-  const group = db.select().from(t.categoryGroups).where(eq(t.categoryGroups.id, id)).get();
+-  if (account === undefined && group === undefined) notFound("account, category or group", id);
+-};
+-
+ export const setNote = (db: Db, id: string, note: string | null) => {
+   if (note === null || note.trim() === "") {
+     db.delete(t.notes).where(eq(t.notes.id, id)).run();
+diff --git a/packages/engine/src/ledger/categories.ts b/packages/engine/src/ledger/categories.ts
+index 37cf5bd..efc1343 100644
+--- a/packages/engine/src/ledger/categories.ts
++++ b/packages/engine/src/ledger/categories.ts
+@@ -199,7 +199,6 @@ export const deleteCategoryGroup = (
+   book.db.update(t.accounts).set({ parentId: null }).where(eq(t.accounts.groupId, input.id)).run();
+   for (const member of members) removeCategory(book.db, member.id, input.transferCategory);
+   dropFromRules(book.db, "category_group", new Set([input.id]));
+-  book.db.delete(t.notes).where(eq(t.notes.id, input.id)).run();
+   book.db.delete(t.categoryGroups).where(eq(t.categoryGroups.id, input.id)).run();
+   return { deleted: input.id };
+ };
+diff --git a/packages/engine/src/operations.ts b/packages/engine/src/operations.ts
+index 67a3e3f..4212e21 100644
+--- a/packages/engine/src/operations.ts
++++ b/packages/engine/src/operations.ts
+@@ -21,7 +21,7 @@ import { projectionHandlers } from "./reports/projections.ts";
+ import { ruleHandlers } from "./rules/handlers.ts";
+ import { scheduleHandlers } from "./schedules/handlers.ts";
+ import { templateHandlers } from "./templates/handlers.ts";
+-import { refuseNoteOnNothing, setNote, writeSettings, readSettings, type Book } from "./book.ts";
++import { setNote, writeSettings, readSettings, type Book } from "./book.ts";
+ import { Books } from "./books.ts";
+ import { inTransaction, reverseLatest } from "./db/open.ts";
+ import {
+@@ -93,10 +93,7 @@ export const handlers = {
+   delete_book: (books, input) => Effect.as(books.remove(input.id), { deleted: input.id }),
+   undo: (book) => ({ done: reverseLatest(book.client, "undo") }),
+   redo: (book) => ({ done: reverseLatest(book.client, "redo") }),
+-  set_note: (book, input) => {
+-    refuseNoteOnNothing(book.db, input.id);
+-    return { id: input.id, note: setNote(book.db, input.id, input.note) };
+-  },
++  set_note: (book, input) => ({ id: input.id, note: setNote(book.db, input.id, input.note) }),
+ 
+   list_accounts: (book, input) => listAccounts(book, input),
+   account_activity: (book, input) => accountActivity(book, input),

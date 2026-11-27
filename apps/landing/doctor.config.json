@@ -1,0 +1,5 @@
+{
+  "ignore": {
+    "files": ["src/components/**", "src/lib/**", "src/hooks/**"]
+  }
+}

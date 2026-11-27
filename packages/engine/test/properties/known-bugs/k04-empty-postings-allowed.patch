@@ -1,0 +1,11 @@
+--- a/packages/engine/src/ledger/transactions.ts
++++ b/packages/engine/src/ledger/transactions.ts
+@@ -333,7 +333,7 @@
+ 
+ /** A transaction's postings rewritten; each keeps the id and marks of the posting it continues. */
+ const replacePostings = (db: Db, id: string, postings: ReadonlyArray<PostingInput>) => {
+-  checkPostings(db, postings);
++  if (postings.length > 0) checkPostings(db, postings);
+   const continued = continuedPostings(postingsOf(db, id), postings);
+   db.delete(t.postings).where(eq(t.postings.transactionId, id)).run();
+   postings.forEach((posting, index) => {

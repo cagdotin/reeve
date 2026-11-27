@@ -1,0 +1,1 @@
+ALTER TABLE `accounts` ADD `parent_id` text REFERENCES accounts(id);

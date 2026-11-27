@@ -1,0 +1,25 @@
+# Git hooks. Commits get a fast gate (no secrets, format and lint the staged files, typecheck); a push runs
+# `pnpm check:push`, which is `pnpm check` without the end-to-end tests and the desktop build (CI runs those).
+pre-commit:
+  piped: true
+  jobs:
+    - name: secrets
+      run: gitleaks git --pre-commit --staged --redact --no-banner
+
+    - name: format staged
+      glob: "*.{js,jsx,ts,tsx,mjs,cjs,mts,cts,json,jsonc,yaml,yml,toml,html,css,md}"
+      run: pnpm exec oxfmt --no-error-on-unmatched-pattern {staged_files}
+      stage_fixed: true
+
+    - name: lint-fix staged
+      glob: "*.{js,jsx,ts,tsx,mjs,cjs,mts,cts}"
+      run: pnpm exec oxlint --fix --deny-warnings --no-error-on-unmatched-pattern {staged_files}
+      stage_fixed: true
+
+    - name: typecheck
+      run: pnpm typecheck
+
+pre-push:
+  jobs:
+    - name: check
+      run: pnpm check:push

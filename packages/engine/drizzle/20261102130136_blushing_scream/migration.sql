@@ -1,0 +1,1 @@
+ALTER TABLE `category_groups` ADD `description` text;

@@ -1,0 +1,11 @@
+--- a/packages/engine/src/budget/view.ts
++++ b/packages/engine/src/budget/view.ts
+@@ -85,7 +85,7 @@
+   );
+   return (month: string, category: string): boolean => {
+     const at = monthToInt(month);
+-    return byCategory.get(category)?.findLast((row) => row.month <= at)?.carryover ?? false;
++    return byCategory.get(category)?.find((row) => row.month === at)?.carryover ?? false;
+   };
+ };
+ 

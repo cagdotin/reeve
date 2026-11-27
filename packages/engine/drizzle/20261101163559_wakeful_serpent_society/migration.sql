@@ -1,0 +1,1 @@
+ALTER TABLE `receipts` ADD `auto_applied` integer DEFAULT false NOT NULL;

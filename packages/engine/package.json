@@ -1,0 +1,25 @@
+{
+  "name": "@reeve/engine",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@reeve/contract": "workspace:*",
+    "@rschedule/core": "1.5.0",
+    "@rschedule/standard-date-adapter": "1.5.0",
+    "csv-parse": "^6.2.1",
+    "csv-stringify": "^6.9.0",
+    "date-fns": "^4.4.0",
+    "drizzle-orm": "1.0.0-rc.5",
+    "effect": "4.0.6",
+    "handlebars": "^4.7.10",
+    "hyperformula": "^3.5.0",
+    "xml2js": "^0.6.2"
+  },
+  "devDependencies": {
+    "@types/xml2js": "^0.4.14"
+  }
+}

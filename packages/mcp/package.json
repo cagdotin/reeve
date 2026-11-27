@@ -1,0 +1,14 @@
+{
+  "name": "@reeve/mcp",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "dependencies": {
+    "@reeve/contract": "workspace:*",
+    "@reeve/engine": "workspace:*",
+    "effect": "4.0.6"
+  }
+}

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Document xmlns="urn:iso:std:iso:20022:tech:xsd:camt.053.001.04">
+  <BkToCstmrStmt>
+    <Stmt>
+      <Id>ERSTE-CARD</Id>
+      <Acct><Id><IBAN>AT022011100000000000</IBAN></Id><Ccy>EUR</Ccy></Acct>
+      <Ntry>
+        <Amt Ccy="EUR">11.50</Amt>
+        <CdtDbtInd>DBIT</CdtDbtInd>
+        <Sts>BOOK</Sts>
+        <BookgDt><Dt>2026-11-01</Dt></BookgDt>
+        <AcctSvcrRef>erste-1</AcctSvcrRef>
+        <AddtlNtryInf>TABAK TRAFIK 3219  K2   01.11. 22:26</AddtlNtryInf>
+      </Ntry>
+      <Ntry>
+        <Amt Ccy="EUR">6.20</Amt>
+        <CdtDbtInd>DBIT</CdtDbtInd>
+        <Sts>BOOK</Sts>
+        <BookgDt><Dt>2026-11-03</Dt></BookgDt>
+        <AcctSvcrRef>erste-2</AcctSvcrRef>
+        <AddtlNtryInf>TABAK TRAFIK 3219  K2   03.11. 09:45</AddtlNtryInf>
+      </Ntry>
+      <Ntry>
+        <Amt Ccy="EUR">70.90</Amt>
+        <CdtDbtInd>DBIT</CdtDbtInd>
+        <Sts>BOOK</Sts>
+        <BookgDt><Dt>2026-10-28</Dt></BookgDt>
+        <AcctSvcrRef>erste-3</AcctSvcrRef>
+        <AddtlNtryInf>POS          70,90 AT  K2   28.10. 14:44 BILLA DANKT 1598 HAUPTSTRASSE 1010 040</AddtlNtryInf>
+      </Ntry>
+      <Ntry>
+        <Amt Ccy="EUR">12.35</Amt>
+        <CdtDbtInd>DBIT</CdtDbtInd>
+        <Sts>BOOK</Sts>
+        <BookgDt><Dt>2026-10-30</Dt></BookgDt>
+        <AcctSvcrRef>erste-4</AcctSvcrRef>
+        <AddtlNtryInf>POS          12,35 AT  K2   30.10. 18:02 BILLA DANKT 1598 HAUPTSTRASSE 1010 040</AddtlNtryInf>
+      </Ntry>
+      <Ntry>
+        <Amt Ccy="EUR">51.00</Amt>
+        <CdtDbtInd>DBIT</CdtDbtInd>
+        <Sts>BOOK</Sts>
+        <BookgDt><Dt>2026-10-31</Dt></BookgDt>
+        <AcctSvcrRef>erste-5</AcctSvcrRef>
+        <NtryDtls>
+          <TxDtls>
+            <RltdPties><Cdtr><Nm>Wiener Linien GmbH &amp; Co KG</Nm></Cdtr></RltdPties>
+            <RmtInf><Ustrd>Jahreskarte 2026</Ustrd></RmtInf>
+          </TxDtls>
+        </NtryDtls>
+      </Ntry>
+    </Stmt>
+  </BkToCstmrStmt>
+</Document>

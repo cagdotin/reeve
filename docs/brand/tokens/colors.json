@@ -1,0 +1,15 @@
+[
+  {
+    "name": "Parchment",
+    "hex": "#F6F4EB",
+    "role": "Backgrounds and surfaces on light, text on dark"
+  },
+  {
+    "name": "Forest",
+    "hex": "#0B3A2E",
+    "role": "Brand, headers and text on light, backgrounds on dark"
+  },
+  { "name": "Pine", "hex": "#16634A", "role": "Accents and secondary surfaces on light" },
+  { "name": "Sage", "hex": "#8FBFA8", "role": "Highlights and accents on dark" },
+  { "name": "Brass", "hex": "#D8B478", "role": "Emphasis, icons and premium accents" }
+]

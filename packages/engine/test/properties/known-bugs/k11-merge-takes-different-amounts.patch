@@ -1,0 +1,14 @@
+--- a/packages/engine/src/ledger/transactions.ts
++++ b/packages/engine/src/ledger/transactions.ts
+@@ -568,7 +568,10 @@
+         (each) => each.accountId === posting.accountId && each.amount === posting.amount,
+       ),
+   );
+-  if (kept === undefined) return invalid("Merge transactions of one account and the same amount");
++  if (kept === undefined) {
++    db.delete(t.transactions).where(eq(t.transactions.id, drop.id)).run();
++    return getTransaction(db, keep.id);
++  }
+   const dropped = drop.postings.find(
+     (each) => each.accountId === kept.accountId && each.amount === kept.amount,
+   )!;

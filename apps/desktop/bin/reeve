@@ -1,0 +1,6 @@
+#!/bin/sh
+# The reeve CLI the desktop app ships: the app's own binary, run as Node, runs its bundled CLI.
+# Link it onto your PATH: ln -s /Applications/reeve.app/Contents/Resources/bin/reeve ~/.local/bin/
+app="$(cd "$(dirname "$(realpath "$0")")/../../.." && pwd)"
+ELECTRON_RUN_AS_NODE=1 REEVE_APP="$app" REEVE_WEB_DIR="$app/Contents/Resources/web" \
+  exec "$app/Contents/MacOS/reeve" "$app/Contents/Resources/app.asar/dist/cli.mjs" "$@"

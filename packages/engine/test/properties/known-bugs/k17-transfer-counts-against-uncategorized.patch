@@ -1,0 +1,12 @@
+--- a/packages/engine/src/ledger/transactions.ts
++++ b/packages/engine/src/ledger/transactions.ts
+@@ -57,7 +57,8 @@
+     const row = rows[index]!;
+     if (posting.category !== undefined && posting.category !== null) {
+       const category = account(db, posting.category);
+-      if (!isCategory(category)) invalid(`${category.name} is not a category`);
++      if (category.type !== "expense" && category.type !== "income")
++        invalid(`${category.name} is not a category`);
+       if (!isBalanceAccount(row) || row.onBudget)
+         invalid("Only an off-budget account's posting can name a category");
+       if (!touchesBudget) invalid("A category counts only on a transfer from a budget account");

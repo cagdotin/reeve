@@ -1,0 +1,28 @@
+--- a/packages/engine/src/ledger/transactions.ts
++++ b/packages/engine/src/ledger/transactions.ts
+@@ -348,7 +348,7 @@
+   const same = postings.map((posting) =>
+     take((row) => row.accountId === posting.account && row.amount === posting.amount),
+   );
+-  if (free.some((row) => row.reconciled))
++  if (free.some((row) => row.reconciled && row.accountId === postings[0]?.account))
+     invalid("The posting is reconciled: its amount and account cannot change");
+   return postings.map(
+     (posting, index) => same[index] ?? take((row) => row.accountId === posting.account),
+@@ -364,14 +364,14 @@
+     const before = continued[index];
+     db.insert(t.postings)
+       .values({
+-        id: before?.id ?? newId(),
++        id: (index === 0 ? before?.id : undefined) ?? newId(),
+         transactionId: id,
+         accountId: posting.account,
+         amount: posting.amount,
+         memo: posting.memo === undefined ? (before?.memo ?? null) : posting.memo,
+         categoryId: posting.category ?? null,
+         cleared: posting.cleared ?? before?.cleared ?? false,
+-        reconciled: before?.reconciled ?? false,
++        reconciled: index === 0 ? (before?.reconciled ?? false) : false,
+         sortOrder: index,
+       })
+       .run();

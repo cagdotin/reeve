@@ -1,0 +1,100 @@
+diff --git a/packages/engine/src/rules/handlers.ts b/packages/engine/src/rules/handlers.ts
+index 432bce1..bb8b6f9 100644
+--- a/packages/engine/src/rules/handlers.ts
++++ b/packages/engine/src/rules/handlers.ts
+@@ -31,7 +31,6 @@ import {
+   getRuleRow,
+   insertRule,
+   loadRules,
+-  refuseMissingNames,
+   updateRule,
+   validRule,
+ } from "./store.ts";
+@@ -269,7 +268,6 @@ export const ruleHandlers = {
+   get_rule: (book, input) => entityOf(getRuleRow(book.db, input.id)),
+   create_rule: (book, input, held: HeldTransactions = noneHeld) => {
+     const { recategorize: wanted = true, ...shape } = input;
+-    refuseMissingNames(book.db, shape);
+     const rule = insertRule(book.db, {
+       ...shape,
+       stage: shape.stage ?? "default",
+@@ -285,7 +283,6 @@ export const ruleHandlers = {
+     const { id, recategorize: wanted = true, ...change } = input;
+     const before = entityOf(getRuleRow(book.db, id));
+     refuseScheduleChange(book, before, change);
+-    refuseMissingNames(book.db, { ...before, ...change }, before);
+     const was = ruleCategory(before.actions);
+     const rule = updateRule(book.db, id, change);
+     const category = ruleCategory(rule.actions);
+@@ -354,11 +351,6 @@ export const ruleHandlers = {
+     const { importedId: _importedId, ...entry } = ruled;
+     return entry;
+   },
+-  create_payee_rename_rule: (book, input) => {
+-    refuseMissingNames(book.db, {
+-      conditions: [],
+-      actions: [{ op: "set", field: "payee", value: input.to }],
+-    });
+-    return updatePayeeRenameRule(book.db, input.fromNames, input.to);
+-  },
++  create_payee_rename_rule: (book, input) =>
++    updatePayeeRenameRule(book.db, input.fromNames, input.to),
+ } satisfies DomainHandlers<typeof rules>;
+diff --git a/packages/engine/src/rules/store.ts b/packages/engine/src/rules/store.ts
+index 2dda554..65e803f 100644
+--- a/packages/engine/src/rules/store.ts
++++ b/packages/engine/src/rules/store.ts
+@@ -119,53 +119,6 @@ export const loadRules = (db: Db): Array<LoadedRule> =>
+ export const getRuleRow = (db: Db, id: string): RuleRow =>
+   db.select().from(t.rules).where(eq(t.rules.id, id)).get() ?? notFound("rule", id);
+ 
+-const ID_OPS = new Set(["is", "isNot", "oneOf", "notOneOf"]);
+-
+-/** The rows a rule's id field can name. */
+-const TARGETS: Readonly<Record<string, (db: Db) => ReadonlyArray<{ readonly id: string }>>> = {
+-  account: (db) =>
+-    db
+-      .select({ id: t.accounts.id })
+-      .from(t.accounts)
+-      .where(inArray(t.accounts.type, ["asset", "liability"]))
+-      .all(),
+-  category: (db) =>
+-    db
+-      .select({ id: t.accounts.id })
+-      .from(t.accounts)
+-      .where(inArray(t.accounts.type, ["expense", "income"]))
+-      .all(),
+-  category_group: (db) => db.select({ id: t.categoryGroups.id }).from(t.categoryGroups).all(),
+-  payee: (db) => db.select({ id: t.payees.id }).from(t.payees).all(),
+-};
+-
+-type RuleItems = Pick<RuleShape, "conditions" | "actions">;
+-
+-const namedIds = (shape: RuleItems) =>
+-  [
+-    ...shape.conditions.filter((each) => ID_OPS.has(each.op)),
+-    ...shape.actions.flatMap((each) =>
+-      each.op === "set" && each.template === undefined && each.formula === undefined ? [each] : [],
+-    ),
+-  ].flatMap((each) =>
+-    (Array.isArray(each.value) ? (each.value as Array<unknown>) : [each.value])
+-      .filter((value): value is string => typeof value === "string" && value !== "")
+-      .map((id) => ({ field: each.field as string, id })),
+-  );
+-
+-/**
+- * Refuses a rule that names what does not exist. What `kept` already named stays allowed, so a rule
+- * from an older book can still be edited.
+- */
+-export const refuseMissingNames = (db: Db, shape: RuleItems, kept?: RuleItems) => {
+-  const known = new Set(kept === undefined ? [] : namedIds(kept).map((each) => each.id));
+-  for (const { field, id } of namedIds(shape)) {
+-    const targets = TARGETS[field];
+-    if (targets === undefined || known.has(id)) continue;
+-    if (!targets(db).some((row) => row.id === id)) notFound(field.replace("_", " "), id);
+-  }
+-};
+-
+ export const insertRule = (db: Db, shape: RuleShape): RuleEntity => {
+   validRule(shape);
+   const id = shape.id ?? newId();

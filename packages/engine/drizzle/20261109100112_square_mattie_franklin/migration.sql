@@ -1,0 +1,1 @@
+ALTER TABLE `seen_imports` ADD `line` text;

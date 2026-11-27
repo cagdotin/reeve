@@ -1,0 +1,15 @@
+{
+  "testRunner": "vitest",
+  "plugins": ["@stryker-mutator/vitest-runner"],
+  "vitest": { "configFile": "vitest.mutation.config.ts" },
+  "mutate": [
+    "packages/engine/src/ledger/**/*.ts",
+    "packages/contract/src/rules.ts",
+    "packages/contract/src/receipts.ts"
+  ],
+  "ignorePatterns": ["/docs", "/.agents", "/.claude", "/.octodo"],
+  "tsconfigFile": "tsconfig.not-rewritten.json",
+  "timeoutMS": 60000,
+  "reporters": ["clear-text", "progress-append-only", "html", "json"],
+  "clearTextReporter": { "reportTests": false, "reportMutants": false, "allowColor": false }
+}

@@ -1,0 +1,12 @@
+--- a/packages/engine/src/ledger/transactions.ts
++++ b/packages/engine/src/ledger/transactions.ts
+@@ -523,8 +523,7 @@
+     const row = account(db, line.account);
+     return isBalanceAccount(row) && row.onBudget;
+   });
+-  const ownCategory =
+-    next.transferAccount === draft.transferAccount && fromBudget ? own.categoryId : null;
++  const ownCategory = null;
+   replacePostings(
+     db,
+     change.id,

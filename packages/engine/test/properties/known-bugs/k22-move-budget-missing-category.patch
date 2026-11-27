@@ -1,0 +1,13 @@
+diff --git a/packages/engine/src/budget/actions.ts b/packages/engine/src/budget/actions.ts
+index 10d279f..9e0d6db 100644
+--- a/packages/engine/src/budget/actions.ts
++++ b/packages/engine/src/budget/actions.ts
+@@ -144,8 +144,6 @@ export const moveBudget = (
+ ) => {
+   if (input.from === input.to) invalid("Move money between two different places");
+   if (input.amount <= 0) invalid("Move a positive amount");
+-  for (const place of [input.from, input.to])
+-    if (place !== "to-budget") categoryRow(book.db, place);
+   const type = typeOf(book);
+   if (input.from !== "to-budget") addToBudget(book, type, input.month, input.from, -input.amount);
+   if (input.to !== "to-budget") addToBudget(book, type, input.month, input.to, input.amount);

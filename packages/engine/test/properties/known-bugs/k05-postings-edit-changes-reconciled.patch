@@ -1,0 +1,45 @@
+--- a/packages/engine/src/ledger/transactions.ts
++++ b/packages/engine/src/ledger/transactions.ts
+@@ -315,6 +315,7 @@
+ const continuedPostings = (
+   old: ReadonlyArray<PostingRow>,
+   postings: ReadonlyArray<PostingInput>,
++  unchecked: boolean,
+ ): Array<PostingRow | undefined> => {
+   const free = old.toSorted((a, b) => Number(b.reconciled) - Number(a.reconciled));
+   const take = (matches: (row: PostingRow) => boolean) => {
+@@ -324,7 +325,7 @@
+   const same = postings.map((posting) =>
+     take((row) => row.accountId === posting.account && row.amount === posting.amount),
+   );
+-  if (free.some((row) => row.reconciled))
++  if (!unchecked && free.some((row) => row.reconciled))
+     invalid("The posting is reconciled: its amount and account cannot change");
+   return postings.map(
+     (posting, index) => same[index] ?? take((row) => row.accountId === posting.account),
+@@ -332,9 +333,14 @@
+ };
+ 
+ /** A transaction's postings rewritten; each keeps the id and marks of the posting it continues. */
+-const replacePostings = (db: Db, id: string, postings: ReadonlyArray<PostingInput>) => {
++const replacePostings = (
++  db: Db,
++  id: string,
++  postings: ReadonlyArray<PostingInput>,
++  unchecked = false,
++) => {
+   checkPostings(db, postings);
+-  const continued = continuedPostings(postingsOf(db, id), postings);
++  const continued = continuedPostings(postingsOf(db, id), postings, unchecked);
+   db.delete(t.postings).where(eq(t.postings.transactionId, id)).run();
+   postings.forEach((posting, index) => {
+     const before = continued[index];
+@@ -432,7 +438,7 @@
+ 
+   if (change.postings !== undefined) {
+     for (const posting of change.postings) account(db, posting.account);
+-    replacePostings(db, change.id, change.postings);
++    replacePostings(db, change.id, change.postings, true);
+     return getTransaction(db, change.id);
+   }
+   const touchesRegister = REGISTER_FIELDS.some((field) => change[field] !== undefined);

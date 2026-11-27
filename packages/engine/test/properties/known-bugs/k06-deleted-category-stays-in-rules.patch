@@ -1,0 +1,30 @@
+--- a/packages/engine/src/ledger/categories.ts
++++ b/packages/engine/src/ledger/categories.ts
+@@ -4,7 +4,6 @@
+ import type { Db } from "../db/open.ts";
+ import * as t from "../db/schema.ts";
+ import { reorder } from "./accounts.ts";
+-import { dropFromRules, moveInRules } from "./rule-references.ts";
+ 
+ type GroupRow = typeof t.categoryGroups.$inferSelect;
+ type AccountRow = typeof t.accounts.$inferSelect;
+@@ -174,11 +173,9 @@
+ const removeCategory = (db: Db, id: string, transferTo: string | undefined) => {
+   if (transferTo !== undefined) {
+     transferCategory(db, id, transferTo);
+-    moveInRules(db, "category", new Set([id]), transferTo);
+   } else {
+     if (hasActivity(db, id))
+       invalid("The category has transactions: name transferCategory to move them to");
+-    dropFromRules(db, "category", new Set([id]));
+   }
+   db.delete(t.budgets).where(eq(t.budgets.categoryId, id)).run();
+   db.delete(t.notes).where(eq(t.notes.id, id)).run();
+@@ -198,7 +195,6 @@
+     invalid("Transfer to a category outside the group being deleted");
+   book.db.update(t.accounts).set({ parentId: null }).where(eq(t.accounts.groupId, input.id)).run();
+   for (const member of members) removeCategory(book.db, member.id, input.transferCategory);
+-  dropFromRules(book.db, "category_group", new Set([input.id]));
+   book.db.delete(t.notes).where(eq(t.notes.id, input.id)).run();
+   book.db.delete(t.categoryGroups).where(eq(t.categoryGroups.id, input.id)).run();
+   return { deleted: input.id };

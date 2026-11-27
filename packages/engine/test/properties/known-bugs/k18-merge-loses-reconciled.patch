@@ -1,0 +1,47 @@
+diff --git a/packages/engine/src/ledger/transactions.ts b/packages/engine/src/ledger/transactions.ts
+index f015852..c80600a 100644
+--- a/packages/engine/src/ledger/transactions.ts
++++ b/packages/engine/src/ledger/transactions.ts
+@@ -552,13 +552,6 @@ export const mergeTransactions = (
+   const dropped = drop.postings.find(
+     (each) => each.accountId === kept.accountId && each.amount === kept.amount,
+   )!;
+-  const counter = keep.postings.filter((posting) => posting.id !== kept.id);
+-  const takesCounter = counter.every((posting) => isUncategorized(db, posting));
+-  const lost = drop.postings.some(
+-    (posting) =>
+-      posting.reconciled && (posting.id === dropped.id ? kept.reconciled : !takesCounter),
+-  );
+-  if (lost) invalid("Merging would lose a reconciled posting: delete that transaction instead");
+   db.update(t.transactions)
+     .set({
+       payeeId: keep.payeeId ?? drop.payeeId,
+@@ -569,23 +562,21 @@ export const mergeTransactions = (
+     })
+     .where(eq(t.transactions.id, keep.id))
+     .run();
+-  // What the dropped copy cleared stays so, and what it reconciled on the amount they share.
++  // What the dropped copy cleared or reconciled stays so.
+   for (const posting of drop.postings) {
+-    const shared = posting.id === dropped.id;
+-    const match = shared
+-      ? kept
+-      : keep.postings.find((each) => each.accountId === posting.accountId);
++    const match = keep.postings.find((each) => each.accountId === posting.accountId);
+     if (match !== undefined && (posting.cleared || posting.reconciled))
+       db.update(t.postings)
+         .set({
+           cleared: match.cleared || posting.cleared,
+-          reconciled: match.reconciled || (shared && posting.reconciled),
++          reconciled: match.reconciled || posting.reconciled,
+         })
+         .where(eq(t.postings.id, match.id))
+         .run();
+   }
+   // An uncategorized copy takes the other's category, split or transfer.
+-  if (takesCounter) {
++  const counter = keep.postings.filter((posting) => posting.id !== kept.id);
++  if (counter.every((posting) => isUncategorized(db, posting))) {
+     db.delete(t.postings)
+       .where(
+         inArray(

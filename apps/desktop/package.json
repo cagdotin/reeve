@@ -1,0 +1,65 @@
+{
+  "name": "@reeve/desktop",
+  "version": "0.0.0",
+  "private": true,
+  "description": "reeve, local-first budgeting on a double-entry ledger, as a macOS app.",
+  "type": "module",
+  "main": "dist/main.mjs",
+  "scripts": {
+    "build": "tsdown",
+    "dev": "tsdown && REEVE_DEV_URL=http://localhost:5620 electron .",
+    "start": "electron .",
+    "package": "electron-builder --mac"
+  },
+  "devDependencies": {
+    "@effect/platform-node": "4.0.6",
+    "@reeve/cli": "workspace:*",
+    "@reeve/client": "workspace:*",
+    "@reeve/engine": "workspace:*",
+    "@reeve/server": "workspace:*",
+    "effect": "4.0.6",
+    "electron": "^45.0.0",
+    "electron-builder": "^26.18.0",
+    "tsdown": "^0.23.2"
+  },
+  "build": {
+    "appId": "app.reeve.desktop",
+    "npmRebuild": false,
+    "publish": null,
+    "files": [
+      "dist/**",
+      "package.json"
+    ],
+    "extraResources": [
+      {
+        "from": "../web/dist",
+        "to": "web"
+      },
+      {
+        "from": "bin",
+        "to": "bin"
+      }
+    ],
+    "directories": {
+      "output": "release"
+    },
+    "electronFuses": {
+      "runAsNode": true,
+      "enableNodeOptionsEnvironmentVariable": false,
+      "enableNodeCliInspectArguments": false,
+      "enableEmbeddedAsarIntegrityValidation": true,
+      "onlyLoadAppFromAsar": true,
+      "grantFileProtocolExtraPrivileges": false
+    },
+    "mac": {
+      "category": "public.app-category.finance",
+      "icon": "build/icon.icns",
+      "target": [
+        "dmg"
+      ],
+      "identity": "-",
+      "notarize": false
+    }
+  },
+  "productName": "reeve"
+}

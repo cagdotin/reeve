@@ -1,0 +1,11 @@
+--- a/packages/engine/src/ledger/transactions.ts
++++ b/packages/engine/src/ledger/transactions.ts
+@@ -274,7 +274,7 @@
+       importedId: null,
+       scheduleId: null,
+     },
+-    { keepCategory: true },
++    { keepCategory: false },
+   );
+   if (id === null) return invalid("A rule deleted the transaction");
+   learnCategories(book.db, [id]);

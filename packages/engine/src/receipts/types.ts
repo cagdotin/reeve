@@ -1,0 +1,21 @@
+/** The receipts domain's contract types, as the catalog's entries give them. */
+export type {
+  ItemCategory,
+  MatchCandidate,
+  PricePoint,
+  Product,
+  ProductAlias,
+  ProductSuggestion,
+  Receipt,
+  ReceiptAdjustment,
+  ReceiptInput,
+  ReceiptLine,
+  ReceiptLineInput,
+  ReceiptPayment,
+  ReceiptPhoto,
+  ReceiptStatus,
+  ReceiptSummary,
+  ReceiptUnit,
+  ReceiptWarning,
+  SplitPreview,
+} from "@reeve/contract/catalog";

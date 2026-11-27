@@ -1,0 +1,16 @@
+diff --git a/packages/engine/src/schedules/schedules.ts b/packages/engine/src/schedules/schedules.ts
+index 06bd393..3312f00 100644
+--- a/packages/engine/src/schedules/schedules.ts
++++ b/packages/engine/src/schedules/schedules.ts
+@@ -420,11 +420,6 @@ export const updateScheduleRow = (
+ 
+ export const deleteSchedule = (book: Book, id: string) => {
+   const row = scheduleRow(book.db, id);
+-  book.db
+-    .update(t.transactions)
+-    .set({ scheduleId: null })
+-    .where(eq(t.transactions.scheduleId, id))
+-    .run();
+   book.db.delete(t.schedules).where(eq(t.schedules.id, id)).run();
+   book.db.delete(t.rules).where(eq(t.rules.id, row.ruleId)).run();
+   return { deleted: id };

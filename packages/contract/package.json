@@ -1,0 +1,21 @@
+{
+  "name": "@reeve/contract",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/domain.ts",
+    "./api": "./src/api.ts",
+    "./catalog": "./src/catalog.ts",
+    "./client": "./src/client.ts",
+    "./features": "./src/features.ts",
+    "./rules": "./src/rules.ts",
+    "./receipts": "./src/receipts.ts",
+    "./targets": "./src/targets.ts",
+    "./operations": "./src/operations.ts",
+    "./monte-carlo": "./src/monte-carlo.ts"
+  },
+  "dependencies": {
+    "effect": "4.0.6"
+  }
+}

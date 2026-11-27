@@ -1,0 +1,37 @@
+diff --git a/packages/engine/src/ledger/accounts.ts b/packages/engine/src/ledger/accounts.ts
+index f27fee3..e8bdc52 100644
+--- a/packages/engine/src/ledger/accounts.ts
++++ b/packages/engine/src/ledger/accounts.ts
+@@ -4,7 +4,6 @@ import { and, asc, eq, inArray, sql } from "drizzle-orm";
+ import { invalid, newId, notFound, notesOf, systemAccount, type Book } from "../book.ts";
+ import type { Db } from "../db/open.ts";
+ import * as t from "../db/schema.ts";
+-import { dropFromRules, namedInRule } from "./rule-references.ts";
+ import { insertTransaction } from "./transactions.ts";
+ 
+ const BALANCE_ACCOUNTS = ["asset", "liability"] as const;
+@@ -190,23 +189,12 @@ const hasPostings = (db: Db, accountId: string) =>
+     .where(eq(t.postings.accountId, accountId))
+     .get() !== undefined;
+ 
+-/** A schedule lives on its rule and needs its account, so that account stays, closed. */
+-const namedBySchedule = (db: Db, accountId: string) =>
+-  db
+-    .select({ rule: t.rules })
+-    .from(t.schedules)
+-    .innerJoin(t.rules, eq(t.rules.id, t.schedules.ruleId))
+-    .all()
+-    .some(({ rule }) => namedInRule(rule, "account").has(accountId));
+-
+ export const closeAccount = (
+   book: Book,
+   input: { readonly id: string; readonly transferAccount?: string; readonly category?: string },
+ ) => {
+   const row = balanceAccount(book.db, input.id);
+-  if (!hasPostings(book.db, input.id) && !namedBySchedule(book.db, input.id)) {
+-    dropFromRules(book.db, "account", new Set([input.id]));
+-    book.db.delete(t.notes).where(eq(t.notes.id, input.id)).run();
++  if (!hasPostings(book.db, input.id)) {
+     book.db.delete(t.accounts).where(eq(t.accounts.id, input.id)).run();
+     return { id: input.id, deleted: true };
+   }

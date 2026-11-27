@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "reeve": {
+      "command": "bin/reeve",
+      "args": ["mcp"]
+    },
+    "devl": {
+      "type": "http",
+      "url": "https://devl.dev/mcp"
+    }
+  }
+}

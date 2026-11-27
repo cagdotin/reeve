@@ -1,0 +1,30 @@
+@import "tailwindcss";
+@import "@reeve/ui/styles.css";
+
+/* The app bundles the plugins' web halves, so Tailwind reads their classes too. */
+@source "../../../packages/plugins/src";
+
+/* The macOS desktop app draws its own title bar; see src/lib/desktop.ts. `windowed-mac` is the
+   same minus full screen, where the traffic lights are hidden. */
+@custom-variant desktop-mac (&:where([data-desktop="mac"] *));
+@custom-variant windowed-mac (&:where([data-desktop="mac"]:not([data-fullscreen]) *));
+
+/* Electron drag region: dragging moves the window and a double-click zooms it. Controls inside one
+   must opt out or they stop receiving clicks, so the common ones do here; add `app-no-drag` to any
+   other interactive element placed inside. Browsers ignore both. */
+@utility app-drag {
+  -webkit-app-region: drag;
+
+  & :is(button, a, input, textarea, select, [role="button"], [role="radio"], [role="tab"]) {
+    -webkit-app-region: no-drag;
+  }
+}
+
+@utility app-no-drag {
+  -webkit-app-region: no-drag;
+}
+
+/* A drag region takes the clicks of whatever is drawn over it, so they all stand down under a popup. */
+html:has([role="dialog"], [role="alertdialog"], [role="menu"], [role="listbox"]) .app-drag {
+  -webkit-app-region: no-drag;
+}

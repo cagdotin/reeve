@@ -1,0 +1,11 @@
+--- a/packages/engine/src/ledger/transactions.ts
++++ b/packages/engine/src/ledger/transactions.ts
+@@ -605,7 +605,7 @@
+         .run();
+   }
+   // An uncategorized copy takes the other's category, split or transfer.
+-  if (takesCounter) {
++  if (takesCounter && drop === null) {
+     db.delete(t.postings)
+       .where(
+         inArray(

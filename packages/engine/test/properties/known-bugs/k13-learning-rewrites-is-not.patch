@@ -1,0 +1,11 @@
+--- a/packages/engine/src/rules/learn.ts
++++ b/packages/engine/src/rules/learn.ts
+@@ -68,7 +68,7 @@
+     (category === undefined || action.value === category) &&
+     condition?.field === "payee" &&
+     (op === "is"
+-      ? condition.op === "is" && condition.value === payee
++      ? (condition.op === "is" || condition.op === "isNot") && condition.value === payee
+       : condition.op === "oneOf" &&
+         Array.isArray(condition.value) &&
+         condition.value.includes(payee))

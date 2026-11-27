@@ -1,0 +1,22 @@
+--- a/packages/engine/src/rules/transaction.ts
++++ b/packages/engine/src/rules/transaction.ts
+@@ -223,7 +223,7 @@
+   const ruled = existingCategory(db, trans["category"] ?? null);
+   const category = split
+     ? null
+-    : transferTakesNoCategory(db, entry) || (ruled === null && trans["category"] != null)
++    : ruled === null && trans["category"] != null
+       ? entry.category
+       : ruled;
+   return {
+--- a/packages/engine/src/ledger/transactions.ts
++++ b/packages/engine/src/ledger/transactions.ts
+@@ -228,7 +228,7 @@
+       );
+     return ruled;
+   } catch (error) {
+-    if (!(error instanceof InvalidRequest)) throw error;
++    throw error;
+     const { account, amount, category, transferAccount, splits } = entry;
+     return { ...ruled, account, amount, category, transferAccount, splits };
+   }
